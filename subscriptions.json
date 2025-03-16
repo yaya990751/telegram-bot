@@ -1,0 +1,6 @@
+{
+    "youtube_1m": {"name": "YouTube Premium (1 месяц)", "price": 50000},
+    "netflix_1m": {"name": "Netflix (1 месяц)", "price": 60000},
+    "vpn_1m": {"name": "VPN (1 месяц)", "price": 30000}
+}
+
