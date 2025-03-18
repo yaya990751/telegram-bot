@@ -1,2 +1,4 @@
-sfybot-03184c7b622d.json
+# Исключаем системные файлы macOS
+.DS_Store
+Library/sfybot-03184c7b622d.json
 sfybot-03184c7b622d.json
