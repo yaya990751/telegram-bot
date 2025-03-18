@@ -2,7 +2,7 @@ import json
 import os
 from oauth2client.service_account import ServiceAccountCredentials
 from aiogram import Bot, Dispatcher, types
-from aiogram.utils import executor
+import asyncio
 
 # Загружаем JSON-ключ из переменной окружения
 google_credentials = json.loads(os.getenv("GOOGLE_CREDENTIALS"))
@@ -21,4 +21,8 @@ async def start(message: types.Message):
     await message.reply("Бот успешно запущен! ✅")
 
 if __name__ == "__main__":
-    executor.start_polling(dp, skip_updates=True)
+    asyncio.run(main())
+
+
+async def main():
+    await dp.start_polling(bot)
