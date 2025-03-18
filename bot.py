@@ -14,7 +14,7 @@ creds = ServiceAccountCredentials.from_json_keyfile_dict(google_credentials, sco
 # Инициализация бота
 BOT_TOKEN = os.getenv("BOT_TOKEN")
 bot = Bot(token=BOT_TOKEN)
-dp = Dispatcher(bot)
+dp = Dispatcher()
 
 @dp.message_handler(commands=['start'])
 async def start(message: types.Message):
