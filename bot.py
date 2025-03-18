@@ -1,29 +1,28 @@
-import json
-import os
-from oauth2client.service_account import ServiceAccountCredentials
-from aiogram.filters import Command
-from aiogram import Bot, Dispatcher, types
 import asyncio
+from aiogram import Bot, Dispatcher, types
+from aiogram.types import Message
+from aiogram.filters import Command
+import os
+import json
 
-# Загружаем JSON-ключ из переменной окружения
-google_credentials = json.loads(os.getenv("GOOGLE_CREDENTIALS"))
+# Загружаем переменные окружения
+TOKEN = os.getenv("BOT_TOKEN")
+if not TOKEN:
+    raise ValueError("Не указан BOT_TOKEN в переменных окружения!")
 
-# Авторизация в Google Sheets
-scope = ["https://spreadsheets.google.com/feeds", "https://www.googleapis.com/auth/spreadsheets"]
-creds = ServiceAccountCredentials.from_json_keyfile_dict(google_credentials, scope)
+google_credentials = json.loads(os.getenv("GOOGLE_CREDENTIALS", "{}"))
 
-# Инициализация бота
-BOT_TOKEN = os.getenv("BOT_TOKEN")
-bot = Bot(token=BOT_TOKEN)
-dp = Dispatcher()
+bot = Bot(token=TOKEN)
+dp = Dispatcher()  # В aiogram 3.x Dispatcher создается без аргументов
 
-@dp.message(Command('start'))
-async def start(message: types.Message):
-    await message.reply("Бот успешно запущен! ✅")
+@dp.message(Command("start"))  # Новый способ регистрации команды
+async def start(message: Message):
+    await message.answer("Привет! Я работаю на aiogram 3.x!")
+
+# Функция main() должна быть объявлена перед вызовом asyncio.run()
+async def main():
+    print("Бот запущен...")  # Лог для проверки работы бота
+    await dp.start_polling(bot)
 
 if __name__ == "__main__":
     asyncio.run(main())
-
-
-async def main():
-    await dp.start_polling(bot)
