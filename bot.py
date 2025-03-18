@@ -1,6 +1,7 @@
 import json
 import os
 from oauth2client.service_account import ServiceAccountCredentials
+from aiogram.filters import Command
 from aiogram import Bot, Dispatcher, types
 import asyncio
 
@@ -16,7 +17,7 @@ BOT_TOKEN = os.getenv("BOT_TOKEN")
 bot = Bot(token=BOT_TOKEN)
 dp = Dispatcher()
 
-@dp.message_handler(commands=['start'])
+@dp.message(Command('start'))
 async def start(message: types.Message):
     await message.reply("Бот успешно запущен! ✅")
 
